@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/site.css' %}">
+</head>
+<body class="site-body">
+    {% url 'home' as home_url %}
+    {% url 'products_list' as products_url %}
+    {% url 'login' as login_url %}
+    {% url 'cart' as cart_url %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">SimpleCulinary</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Afficher le menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.path == home_url %} active{% endif %}" href="{{ home_url }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.path == products_url %} active{% endif %}" href="{{ products_url }}">Nos produits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.path == login_url %} active{% endif %}" href="{{ login_url }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.path == cart_url %} active{% endif %}" href="{{ cart_url }}">
+                            <i class="fa-solid fa-cart-shopping"></i> Cart
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% if messages %}
+            <div class="container mt-4">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <span>SimpleCulinary</span>
+            <span>Atelier 4 - Django Templates et Bootstrap</span>
+        </div>
+    </footer>
+
+    <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
