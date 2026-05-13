@@ -34,7 +34,10 @@
                                 <strong class="product-price">{{ product.price }} DH</strong>
                                 <span class="stock-info">Stock : {{ product.stock }}</span>
                             </div>
-                            <a href="{% url 'cart' %}" class="btn btn-primary">Ajouter au panier</a>
+                            <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+                            </form>
                         </div>
                     </div>
                 </article>

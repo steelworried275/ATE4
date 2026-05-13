@@ -7,13 +7,43 @@
     <div class="page-heading">
         <p class="eyebrow">Panier</p>
         <h1>Votre panier</h1>
-        <p class="text-muted">La page panier est connectee a la navigation principale.</p>
+        <p class="text-muted">Retrouvez les produits que vous avez ajoutes depuis le catalogue.</p>
     </div>
 
-    <div class="empty-state">
-        <h2>Votre panier est vide</h2>
-        <p>Consultez le catalogue et ajoutez les produits qui vous interessent.</p>
-        <a class="btn btn-primary" href="{% url 'products_list' %}">Retour aux produits</a>
-    </div>
+    {% if cart_items %}
+        <div class="cart-summary">
+            <div class="cart-count-row">
+                <span>Nombre de produits</span>
+                <strong>{{ cart_count }}</strong>
+            </div>
+            <div class="cart-mini-list">
+                {% for item in cart_items %}
+                    <article class="cart-mini-product">
+                        <div class="cart-mini-details">
+                            <strong>{{ item.product.name }}</strong>
+                            <span>Quantite : {{ item.quantity }}</span>
+                        </div>
+                        <div class="cart-mini-price">
+                            <strong>{{ item.line_total }} DH</strong>
+                            <span>{{ item.product.price }} DH / produit</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+            <div class="cart-total-row">
+                <span>Total panier</span>
+                <strong>{{ cart_total }} DH</strong>
+            </div>
+            <div class="cart-actions">
+                <a class="btn btn-outline-primary" href="{% url 'products_list' %}">Continuer mes achats</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Votre panier est vide</h2>
+            <p>Consultez le catalogue et ajoutez les produits qui vous interessent.</p>
+            <a class="btn btn-primary" href="{% url 'products_list' %}">Retour aux produits</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

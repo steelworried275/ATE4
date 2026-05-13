@@ -1,67 +1,62 @@
 products = [
     {
         'id': '1',
-        'name': 'Machine a emballer sous vide Pro',
-        'image': '/images/scelleurPro.jpg',
-        'description': (
-            "Une machine robuste pour conserver les aliments plus longtemps "
-            "et preparer facilement des portions de cuisine."
-        ),
-        'brand': 'Anova',
-        'category': 'Scelleurs sous vide',
-        'price': 966.99,
+        'name': 'Set de couverts inox 24 pièces',
+        'image': '/media/products/set-couverts-inox-24.png',
+        'description': 'Un ensemble complet de couverts en acier inoxydable pour 6 personnes.',
+        'brand': 'SimpleCulinary',
+        'category': 'Couverts',
+        'price': 299,
         'countInStock': 10,
     },
     {
         'id': '2',
-        'name': 'Machine a emballer sous vide manuelle',
-        'image': '/images/ScelleurMain.jpg',
-        'description': (
-            "Un appareil compact et pratique pour sceller les sacs de "
-            "conservation au quotidien."
-        ),
+        'name': 'Set de couteaux de table 6 pièces',
+        'image': '/media/products/set-couteaux-table-6.png',
+        'description': 'Des couteaux élégants et résistants pour les repas quotidiens.',
         'brand': 'SimpleCulinary',
-        'category': 'Scelleurs sous vide',
-        'price': 599.50,
-        'countInStock': 5,
+        'category': 'Couteaux',
+        'price': 149,
+        'countInStock': 10,
     },
     {
         'id': '3',
-        'name': 'Recipient isotherme pour cuiseur',
-        'image': '/images/conteneurIsotherme.jpg',
-        'description': (
-            "Un recipient isole pour garder une temperature stable pendant "
-            "les preparations de cuisson."
-        ),
+        'name': 'Ménagère dorée 16 pièces',
+        'image': '/media/products/menagere-doree-16.png',
+        'description': 'Un set de couverts dorés au design moderne pour une table raffinée.',
         'brand': 'SimpleCulinary',
-        'category': 'Accessoires',
-        'price': 1490.89,
-        'countInStock': 5,
+        'category': 'Couverts premium',
+        'price': 399,
+        'countInStock': 10,
     },
     {
         'id': '4',
-        'name': 'Poele en fonte',
-        'image': '/images/poeleFieldCompany.jpg',
-        'description': (
-            "Une poele solide et durable pour saisir les aliments et cuisiner "
-            "avec une chaleur bien repartie."
-        ),
-        'brand': 'FieldCompany',
-        'category': 'Accessoires',
-        'price': 399.99,
-        'countInStock': 11,
+        'name': 'Set de cuillères à dessert 12 pièces',
+        'image': '/media/products/set-cuilleres-dessert-12.png',
+        'description': 'Des cuillères pratiques pour desserts, cafés et goûters.',
+        'brand': 'SimpleCulinary',
+        'category': 'Cuillères',
+        'price': 99,
+        'countInStock': 10,
     },
     {
         'id': '5',
-        'name': 'Mini cuiseur de precision',
-        'image': '/images/MiniCuiseur.jpg',
-        'description': (
-            "Un mini cuiseur simple pour regler la temperature et preparer "
-            "des recettes avec precision."
-        ),
+        'name': 'Set de fourchettes inox 12 pièces',
+        'image': '/media/products/set-fourchettes-inox-12.png',
+        'description': 'Des fourchettes solides et faciles à nettoyer pour un usage quotidien.',
         'brand': 'SimpleCulinary',
-        'category': 'Precision Cooker',
-        'price': 2999.99,
-        'countInStock': 7,
+        'category': 'Fourchettes',
+        'price': 119,
+        'countInStock': 10,
+    },
+    {
+        'id': '6',
+        'name': 'Couverts enfants colorés 4 pièces',
+        'image': '/media/products/couverts-enfants-colores-4.png',
+        'description': 'Un petit set sécurisé et coloré adapté aux enfants.',
+        'brand': 'SimpleCulinary',
+        'category': 'Enfants',
+        'price': 79,
+        'countInStock': 10,
     },
 ]
