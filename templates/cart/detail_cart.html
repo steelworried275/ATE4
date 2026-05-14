@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Votre Panier nom user</h1>
+            {% if not cart.items.all %}
+            <div class="alert alert-dismissible alert-info">
+                Votre Panier est vide <a href="{% url 'home' %}" class="alert-link">Retour</a>
+            </div>
+            {% else %}
+            <div class="list-group list-group-flush custom-list">
+                {% for item in cart.items.all %}
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+                            {% else %}
+                                <div class="cart-item-image product-image-placeholder" aria-hidden="true">SC</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3">
+                            {{ item.product.name }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ item.product.prix }}
+                        </div>
+                        <div class="col-md-3">
+                            <form method="post" action="{% url 'cartItem_update' item.id %}">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control mb-2">
+                                {% if item.product.stock %}
+                                <button type="submit" class="btn btn-sm btn-outline-primary" disabled>Quantité en stock insuffisante</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Mettre à jour</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{% url 'cartItem_delete' item.pk %}"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <div class="list-group list-group-flush custom-list">
+                <div class="list-group-item">
+                    <h3>Sous-total</h3>
+                    {{ cart.total }} MAD
+                </div>
+                <div class="list-group-item">
+                    <a href="" class="btn btn-primary">Passer la commande</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

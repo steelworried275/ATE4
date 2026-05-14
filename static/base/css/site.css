@@ -80,6 +80,7 @@ main {
 .card-title {
     margin: 0;
     font-size: 1.1rem;
+    line-height: 1.35;
 }
 
 .product-card-footer {
@@ -99,6 +100,18 @@ main {
     font-size: .9rem;
 }
 
+.product-price {
+    font-size: 1.15rem;
+}
+
+.product-detail-image {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
 .cart-summary {
     max-width: 620px;
 }
@@ -115,6 +128,14 @@ main {
     min-height: 56px;
     padding: .6rem 0;
     border-bottom: 1px solid var(--bs-border-color);
+}
+
+.cart-item-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: .375rem;
 }
 
 .cart-mini-details {

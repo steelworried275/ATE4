@@ -1,24 +1,16 @@
 from django.shortcuts import render
 from django.views import View
-
-from .data import products as sample_products
-
-
-def _products():
-    return [
-        {
-            'id': product['id'],
-            'name': product['name'],
-            'description': product['description'],
-            'price': product['price'],
-            'category': product['category'],
-            'stock': product['countInStock'],
-            'image_url': product['image'],
-        }
-        for product in sample_products
-    ]
+from .models import Product
+from django.views.generic import DetailView, ListView
 
 
-class ProductListView(View):
-    def get(self, request):
-        return render(request, 'products/product_list.html', {'products': _products()})
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'products/product_list.html'
+    context_object_name = 'produits'
+
+
+class ProductDetailsView(DetailView):
+    template_name = "products/product_detail.html"
+    model = Product
+    context_object_name = 'product'

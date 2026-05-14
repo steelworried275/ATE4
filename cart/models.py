@@ -8,9 +8,16 @@ class Cart(models.Model):
         CustomUser,
         on_delete=models.CASCADE,
         related_name='cart',
-        verbose_name='Utilisateur'
+        verbose_name='Utilisateur',
+        null=True,
+        blank=True
     )
+    session_key = models.CharField(max_length=40, null=True, blank=True, verbose_name='Clé de session')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Créé le')
+
+    @property
+    def total(self):
+        return sum(item.product.prix * item.quantity for item in self.items.all())
 
     def __str__(self):
         return f"Panier de {self.user.username}"
