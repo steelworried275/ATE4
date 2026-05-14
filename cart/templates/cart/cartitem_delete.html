@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Supprimer du panier{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="cart-summary">
+        <h1 class="h3">Confirmer la suppression</h1>
+        <p>Voulez-vous supprimer <strong>{{ cartitem.product.name }}</strong> du panier ?</p>
+
+        <form method="post" class="d-flex flex-wrap gap-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

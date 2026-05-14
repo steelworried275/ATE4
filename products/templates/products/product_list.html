@@ -1,33 +1,46 @@
 {% extends 'base/base.html' %}
+
 {% block title %}Produits{% endblock %}
+
 {% block content %}
 <div class="container my-5">
-    <h1>Nos Produits</h1>
-    <div class="row g-4">
-        {% for product in produits %}
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="card product-card h-100">
-                    <a href="{% url 'product_detail' product.id %}">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}">
-                        {% else %}
-                            <div class="product-image-placeholder" aria-hidden="true">SC</div>
-                        {% endif %}
-                    </a>
-                    <div class="card-body d-flex flex-column gap-3">
-                        <h2 class="card-title">
-                            <a href="{% url 'product_detail' product.id %}" class="text-decoration-none">
-                                <strong>{{ product.name }}</strong>
-                            </a>
-                        </h2>
-                        <div class="product-card-footer mt-auto">
-                            <strong class="product-price">{{ product.prix }} MAD</strong>
-                            <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-primary">Voir</a>
+    <div class="page-heading">
+        <p class="eyebrow">Catalogue</p>
+        <h1>Nos Produits</h1>
+    </div>
+
+    {% if produits %}
+        <div class="row g-4">
+            {% for product in produits %}
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="card product-card h-100">
+                        <a href="{% url 'product_detail' product.pk %}">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}">
+                            {% else %}
+                                <div class="product-image-placeholder" aria-hidden="true">SC</div>
+                            {% endif %}
+                        </a>
+                        <div class="card-body d-flex flex-column gap-3">
+                            <h2 class="card-title">
+                                <a href="{% url 'product_detail' product.pk %}" class="text-decoration-none">
+                                    <strong>{{ product.name }}</strong>
+                                </a>
+                            </h2>
+                            <div class="product-card-footer mt-auto">
+                                <strong class="product-price">{{ product.prix }} MAD</strong>
+                                <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm btn-primary">Voir</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Aucun produit disponible</h2>
+            <p>Ajoutez des produits depuis l'administration pour les afficher ici.</p>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

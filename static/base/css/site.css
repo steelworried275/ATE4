@@ -112,6 +112,12 @@ main {
     border-radius: .5rem;
 }
 
+.product-detail-image.product-image-placeholder {
+    display: flex;
+    min-height: 360px;
+    max-height: none;
+}
+
 .cart-summary {
     max-width: 620px;
 }
@@ -136,6 +142,13 @@ main {
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: .375rem;
+}
+
+.cart-item-image.product-image-placeholder {
+    display: flex;
+    height: auto;
+    min-height: 72px;
+    font-size: 1rem;
 }
 
 .cart-mini-details {

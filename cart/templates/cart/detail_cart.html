@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="page-heading">
+        <p class="eyebrow">Panier</p>
+        <h1>Votre panier</h1>
+    </div>
+
+    {% with items=cart.items.all %}
+        {% if items %}
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="list-group list-group-flush custom-list">
+                        {% for item in items %}
+                            <div class="list-group-item py-3">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-4 col-md-2">
+                                        {% if item.product.image %}
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+                                        {% else %}
+                                            <div class="cart-item-image product-image-placeholder" aria-hidden="true">SC</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-8 col-md-3">
+                                        <strong>{{ item.product.name }}</strong>
+                                        <span class="stock-info">Stock : {{ item.product.stock }}</span>
+                                    </div>
+                                    <div class="col-6 col-md-2">
+                                        <strong>{{ item.product.prix }} MAD</strong>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <form method="post" action="{% url 'cartItem_update' item.id %}" class="d-flex gap-2">
+                                            {% csrf_token %}
+                                            <input
+                                                type="number"
+                                                name="quantity"
+                                                value="{{ item.quantity }}"
+                                                min="1"
+                                                max="{{ item.product.stock }}"
+                                                class="form-control"
+                                            >
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">Modifier</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-12 col-md-2 text-md-end">
+                                        <a href="{% url 'cartItem_delete' item.pk %}" class="btn btn-sm btn-outline-danger">
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="cart-summary">
+                        <div class="cart-total-row">
+                            <span>Total du panier</span>
+                            <strong>{{ cart.total }} MAD</strong>
+                        </div>
+                        <a href="#" class="btn btn-primary w-100">Passer la commande</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h2>Votre panier est vide</h2>
+                <p>Consultez le catalogue et ajoutez les produits qui vous interessent.</p>
+                <a class="btn btn-primary" href="{% url 'products_list' %}">Retour aux produits</a>
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

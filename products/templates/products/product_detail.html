@@ -1,61 +1,66 @@
 {% extends 'base/base.html' %}
 
+{% block title %}{{ product.name }}{% endblock %}
+
 {% block content %}
-<div class="container">
-    <a href="{% url 'products_list' %}" class="btn btn-light my-3">Retour</a>
-    <div class="row">
-        <div class="col-md-6">
+<div class="container my-5">
+    <a href="{% url 'products_list' %}" class="btn btn-light mb-4">Retour</a>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
             {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image">
             {% else %}
                 <div class="product-detail-image product-image-placeholder" aria-hidden="true">SC</div>
             {% endif %}
         </div>
-        <div class="col-md-3">
+
+        <div class="col-lg-3">
             <div class="list-group">
                 <div class="list-group-item">
-                    <h3>{{ product.name }}</h3>
+                    <h1 class="h3 mb-0">{{ product.name }}</h1>
                 </div>
                 <div class="list-group-item">
                     {{ product.description }}
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+
+        <div class="col-lg-3">
             <div class="card">
-                <div class="list-group">
+                <div class="list-group list-group-flush">
                     <div class="list-group-item">
                         <div class="row">
-                            <div class="col">Price:</div>
-                            <div class="col"><strong>{{ product.prix }}MAD</strong></div>
+                            <div class="col">Prix</div>
+                            <div class="col text-end"><strong>{{ product.prix }} MAD</strong></div>
                         </div>
                     </div>
                     <div class="list-group-item">
                         <div class="row">
-                            <div class="col">Statut:</div>
-                            <div class="col"><strong>{{ product.stock|yesno:"En stock,En rupture" }}</strong></div>
-                        </div>
-                    </div>
-                    <form method="post" action="{% url 'add_cart' product.id %}">
-                        {% csrf_token %}
-                        <div class="list-group-item">
-                            <div class="row">
-                                <div class="col">Quantité:</div>
-                                <div class="col"><input type="number" name="quantity" min="1" class="form-control mb-2"></div>
+                            <div class="col">Stock</div>
+                            <div class="col text-end">
+                                <strong>{{ product.stock|yesno:"En stock,En rupture" }}</strong>
                             </div>
                         </div>
-                        {% if messages %}
+                    </div>
+                    <form method="post" action="{% url 'add_cart' product.pk %}">
+                        {% csrf_token %}
                         <div class="list-group-item">
-                            {% for message in messages %}
-                                <div class="alert alert-danger">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
+                            <label for="quantity" class="form-label">Quantite</label>
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max="{{ product.stock }}"
+                                class="form-control"
+                                {% if product.stock <= 0 %}disabled{% endif %}
+                            >
                         </div>
-                        {% endif %}
                         <div class="list-group-item text-center">
-                            <button type="submit" class="btn btn-primary" {% if product.stock <= 0 %} disabled {% endif %}>
-                                AJOUTER AU PANIER
+                            <button type="submit" class="btn btn-primary w-100" {% if product.stock <= 0 %}disabled{% endif %}>
+                                Ajouter au panier
                             </button>
                         </div>
                     </form>
