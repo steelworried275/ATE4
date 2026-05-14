@@ -30,6 +30,7 @@
                                     </div>
                                     <div class="col-6 col-md-2">
                                         <strong>{{ item.product.prix }} MAD</strong>
+                                        <span class="stock-info">Total : {{ item.total_price }} MAD</span>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <form method="post" action="{% url 'cartItem_update' item.id %}" class="d-flex gap-2">

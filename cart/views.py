@@ -33,8 +33,13 @@ class AddToCartView(View):
     def post(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
 
+        raw_quantity = request.POST.get('quantity')
+        if raw_quantity in (None, ''):
+            messages.error(request, 'Veuillez saisir une quantite.')
+            return redirect('product_detail', pk=product_id)
+
         try:
-            quantity = int(request.POST.get('quantity', 1))
+            quantity = int(raw_quantity)
         except (TypeError, ValueError):
             messages.error(request, 'Veuillez saisir une quantite valide.')
             return redirect('product_detail', pk=product_id)

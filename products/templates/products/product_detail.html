@@ -39,7 +39,11 @@
                         <div class="row">
                             <div class="col">Stock</div>
                             <div class="col text-end">
-                                <strong>{{ product.stock|yesno:"En stock,En rupture" }}</strong>
+                                {% if product.stock > 0 %}
+                                    <strong>En stock : {{ product.stock }}</strong>
+                                {% else %}
+                                    <strong>Produit indisponible</strong>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -60,7 +64,7 @@
                         </div>
                         <div class="list-group-item text-center">
                             <button type="submit" class="btn btn-primary w-100" {% if product.stock <= 0 %}disabled{% endif %}>
-                                Ajouter au panier
+                                {% if product.stock > 0 %}Ajouter au panier{% else %}Produit indisponible{% endif %}
                             </button>
                         </div>
                     </form>

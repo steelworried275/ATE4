@@ -27,6 +27,13 @@
                                     <strong>{{ product.name }}</strong>
                                 </a>
                             </h2>
+                            <span class="stock-info">
+                                {% if product.stock > 0 %}
+                                    En stock : {{ product.stock }}
+                                {% else %}
+                                    Produit indisponible
+                                {% endif %}
+                            </span>
                             <div class="product-card-footer mt-auto">
                                 <strong class="product-price">{{ product.prix }} MAD</strong>
                                 <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm btn-primary">Voir</a>

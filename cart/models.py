@@ -17,10 +17,16 @@ class Cart(models.Model):
 
     @property
     def total(self):
-        return sum(item.product.prix * item.quantity for item in self.items.all())
+        return self.total_price
+
+    @property
+    def total_price(self):
+        return sum(item.total_price for item in self.items.all())
 
     def __str__(self):
-        return f"Panier de {self.user.username}"
+        if self.user:
+            return f"Panier de {self.user.username}"
+        return f"Panier session {self.session_key}"
 
     class Meta:
         verbose_name = 'Panier'
@@ -44,6 +50,10 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
+
+    @property
+    def total_price(self):
+        return self.product.prix * self.quantity
 
     class Meta:
         verbose_name = 'Article du panier'
